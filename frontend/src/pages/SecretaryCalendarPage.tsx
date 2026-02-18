@@ -1,3 +1,4 @@
+import React from 'react';
 import { OfflineBanner } from '../components/OfflineBanner';
 import { SyncStatusBadge } from '../components/SyncStatusBadge';
 

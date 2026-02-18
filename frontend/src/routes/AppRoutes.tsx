@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { SecretaryCalendarPage } from '../pages/SecretaryCalendarPage';
 import { DoctorWorklistPage } from '../pages/DoctorWorklistPage';

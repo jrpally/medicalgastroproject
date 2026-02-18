@@ -1,3 +1,4 @@
+import React from 'react';
 export type ConflictItem = { id: string; entityType: string; reason: string };
 
 export const ConflictResolutionDrawer = ({ items }: { items: ConflictItem[] }) => (

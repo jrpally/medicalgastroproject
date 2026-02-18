@@ -1,3 +1,4 @@
+import React from 'react';
 import { TimelineFeed } from '../components/TimelineFeed';
 
 export const PatientTimelinePage = () => (

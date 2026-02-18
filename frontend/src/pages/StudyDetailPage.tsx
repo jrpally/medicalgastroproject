@@ -1,3 +1,4 @@
+import React from 'react';
 import { AttachmentUploader } from '../components/AttachmentUploader';
 import { AiInsightPanel } from '../components/AiInsightPanel';
 

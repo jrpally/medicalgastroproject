@@ -1,3 +1,4 @@
+import React from 'react';
 export const TimelineFeed = ({ items }: { items: Array<{ id: string; label: string; at: string }> }) => (
   <ul>
     {items.map((i) => (

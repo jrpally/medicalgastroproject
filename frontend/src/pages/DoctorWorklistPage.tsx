@@ -1,3 +1,4 @@
+import React from 'react';
 export const DoctorWorklistPage = () => (
   <main>
     <h1>Doctor Worklist</h1>

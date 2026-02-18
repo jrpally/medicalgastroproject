@@ -1,3 +1,4 @@
+import React from 'react';
 export const AiInsightPanel = () => (
   <section>
     <h3>AI Insights</h3>
