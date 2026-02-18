@@ -1,5 +1,6 @@
 using Clinic.Api.DTOs;
 using Clinic.Api.Interfaces;
+using Clinic.Api.Storage;
 
 namespace Clinic.Api.Services;
 
