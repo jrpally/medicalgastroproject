@@ -8,6 +8,25 @@ This repository currently contains production-oriented **skeletons** for backend
 - Node.js 20+ and npm
 - (Optional) Azure Storage Emulator/Azurite or Azure resources for real integration
 
+## One-command local startup
+
+A convenience script is provided to build projects and run backend + frontend together:
+
+```bash
+./scripts/local-dev.sh
+```
+
+What this script does:
+1. Restores and builds backend API.
+2. Restores and builds workstation module.
+3. Installs frontend dependencies.
+4. Starts backend on `https://localhost:5001` (also `http://localhost:5000`).
+5. Starts frontend Vite server on `http://localhost:5173`.
+
+Stop all services with `Ctrl+C`.
+
+## Manual startup (if preferred)
+
 ## 1) Start Backend API (`Clinic.Api`)
 
 ```bash
