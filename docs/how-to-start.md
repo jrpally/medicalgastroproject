@@ -12,8 +12,16 @@ This repository currently contains production-oriented **skeletons** for backend
 
 A convenience script is provided to build projects and run backend + frontend together:
 
+- macOS/Linux (bash):
+
 ```bash
 ./scripts/local-dev.sh
+```
+
+- Windows (PowerShell):
+
+```powershell
+./scripts/local-dev.ps1
 ```
 
 What this script does:
