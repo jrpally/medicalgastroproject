@@ -1,12 +1,13 @@
 using Clinic.Api.DTOs;
 using Clinic.Api.Interfaces;
+using Clinic.Api.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clinic.Api.Controllers;
 
 [ApiController]
-[Authorize]
+[Authorize(Policy = AuthorizationPolicies.DoctorOrAdministrator)]
 [Route("reports")]
 public sealed class ReportsController(IReportService reportService) : ControllerBase
 {

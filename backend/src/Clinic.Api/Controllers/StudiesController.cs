@@ -1,12 +1,13 @@
 using Clinic.Api.DTOs;
 using Clinic.Api.Interfaces;
+using Clinic.Api.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clinic.Api.Controllers;
 
 [ApiController]
-[Authorize]
+[Authorize(Policy = AuthorizationPolicies.ClinicalStaff)]
 [Route("studies")]
 public sealed class StudiesController(IStudyService studyService, IAiService aiService) : ControllerBase
 {
@@ -32,6 +33,7 @@ public sealed class StudiesController(IStudyService studyService, IAiService aiS
         => Ok(await studyService.QueryAsync(patientId, type, from, to, ct));
 
     [HttpPost("{id:guid}/ai/draft-report-json")]
+    [Authorize(Policy = AuthorizationPolicies.DoctorOrAdministrator)]
     public async Task<IActionResult> Draft(Guid id, CancellationToken ct)
         => Ok(await aiService.DraftReportJsonAsync(id, ct));
 }

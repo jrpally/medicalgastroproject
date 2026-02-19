@@ -1,11 +1,12 @@
 using Clinic.Api.Interfaces;
+using Clinic.Api.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clinic.Api.Controllers;
 
 [ApiController]
-[Authorize]
+[Authorize(Policy = AuthorizationPolicies.ClinicalStaff)]
 [Route("slots")]
 public sealed class SlotsController(IAppointmentService appointmentService) : ControllerBase
 {

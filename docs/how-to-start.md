@@ -92,3 +92,12 @@ dotnet build
 - Backend validates provider/secretary membership within the selected medical center before booking.
 - On success, backend returns calendar sync results for both doctor and secretary calendars (Google Calendar sync service scaffold).
 
+## Authentication and role authorization (backend scaffold)
+- API authentication uses JWT bearer tokens.
+- Supported application roles: `Administrator`, `Secretary`, `Doctor`.
+- Role-based policies are enforced in controllers:
+  - `SecretaryOrAdministrator`: appointment creation
+  - `ClinicalStaff` (doctor/secretary/admin): slots, patient timeline, study CRUD, attachment upload/link
+  - `DoctorOrAdministrator`: AI analysis endpoints, report drafting/finalization, appointment start/complete
+- Tokens that provide roles in the `roles` claim are normalized to standard role claims by a claims transformation component.
+

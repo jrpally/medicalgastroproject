@@ -3,6 +3,9 @@ using Clinic.Api.Interfaces;
 using Clinic.Api.Repositories;
 using Clinic.Api.Services;
 using Clinic.Api.Storage;
+using Clinic.Api.Security;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +28,20 @@ builder.Services.AddScoped<ITableClientFactory, TableClientFactory>();
 builder.Services.AddScoped<IBlobStorageClient, BlobStorageClient>();
 builder.Services.AddScoped<IQueuePublisher, QueuePublisher>();
 
-builder.Services.AddAuthentication("Bearer").AddJwtBearer();
-builder.Services.AddAuthorization();
+builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
+{
+    options.TokenValidationParameters.RoleClaimType = ClaimTypes.Role;
+    options.TokenValidationParameters.NameClaimType = "name";
+});
+
+builder.Services.AddTransient<IClaimsTransformation, RolesClaimsTransformation>();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(AuthorizationPolicies.AdministratorOnly, policy => policy.RequireRole(AuthRoles.Administrator));
+    options.AddPolicy(AuthorizationPolicies.SecretaryOrAdministrator, policy => policy.RequireRole(AuthRoles.Secretary, AuthRoles.Administrator));
+    options.AddPolicy(AuthorizationPolicies.DoctorOrAdministrator, policy => policy.RequireRole(AuthRoles.Doctor, AuthRoles.Administrator));
+    options.AddPolicy(AuthorizationPolicies.ClinicalStaff, policy => policy.RequireRole(AuthRoles.Doctor, AuthRoles.Secretary, AuthRoles.Administrator));
+});
 
 var app = builder.Build();
 

@@ -1,12 +1,13 @@
 using Clinic.Api.DTOs;
 using Clinic.Api.Interfaces;
+using Clinic.Api.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clinic.Api.Controllers;
 
 [ApiController]
-[Authorize]
+[Authorize(Policy = AuthorizationPolicies.ClinicalStaff)]
 [Route("attachments")]
 public sealed class AttachmentsController(IAttachmentService attachmentService, IAiService aiService) : ControllerBase
 {
@@ -30,6 +31,7 @@ public sealed class AttachmentsController(IAttachmentService attachmentService, 
     }
 
     [HttpPost("{id:guid}/analyze")]
+    [Authorize(Policy = AuthorizationPolicies.DoctorOrAdministrator)]
     public async Task<IActionResult> Analyze(Guid id, [FromBody] AnalyzeAttachmentRequest request, CancellationToken ct)
     {
         await aiService.EnqueueAnalysisAsync(id, request, ct);
@@ -37,6 +39,7 @@ public sealed class AttachmentsController(IAttachmentService attachmentService, 
     }
 
     [HttpGet("{id:guid}/analysis")]
+    [Authorize(Policy = AuthorizationPolicies.DoctorOrAdministrator)]
     public async Task<IActionResult> GetAnalysis(Guid id, CancellationToken ct)
         => Ok(await aiService.GetAnalysisAsync(id, ct));
 }
