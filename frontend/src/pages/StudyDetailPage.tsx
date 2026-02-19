@@ -4,7 +4,8 @@ import { AiInsightPanel } from '../components/AiInsightPanel';
 
 export const StudyDetailPage = () => (
   <main>
-    <h1>Study Detail</h1>
+    <h2>Study Detail</h2>
+    <p>Study Type: Labs · Status: Draft · Ordered By: Dr. Samira Rashed</p>
     <AttachmentUploader />
     <AiInsightPanel />
   </main>

@@ -57,7 +57,13 @@ npm run dev
 
 Expected default behavior:
 - Vite dev server starts (typically at `http://localhost:5173`).
-- Routes are available for secretary and doctor pages.
+- Starter workflow routes are available:
+  - `/admin/users` (admin staff management: doctors/secretaries)
+  - `/secretary/calendar`
+  - `/doctor/worklist`
+  - `/doctor/patients/:id/timeline`
+  - `/doctor/studies/:studyId`
+  - `/doctor/reports/:draftId`
 
 ## 3) Workstation Module (Offline/Sync skeleton)
 
