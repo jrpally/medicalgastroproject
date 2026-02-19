@@ -5,7 +5,7 @@ namespace Clinic.Api.Interfaces;
 
 public interface IAppointmentService
 {
-    Task<AppointmentEntity> CreateAsync(CreateAppointmentRequest request, CancellationToken ct);
+    Task<CreateAppointmentResponse> CreateAsync(CreateAppointmentRequest request, CancellationToken ct);
     Task TransitionAsync(Guid appointmentId, string targetStatus, CancellationToken ct);
     Task<IReadOnlyCollection<SlotDto>> GetSlotsAsync(string providerId, DateTimeOffset from, DateTimeOffset to, CancellationToken ct);
 }
@@ -38,4 +38,15 @@ public interface IReportService
 {
     Task<object> RenderAsync(RenderReportRequest request, CancellationToken ct);
     Task FinalizeAsync(Guid reportId, string etag, CancellationToken ct);
+}
+
+public interface IMedicalCenterDirectoryService
+{
+    Task EnsurePersonnelInCenterAsync(string medicalCenterId, string providerId, string secretaryId, CancellationToken ct);
+    Task<string> ResolveCalendarIdAsync(string medicalCenterId, string userId, CancellationToken ct);
+}
+
+public interface IGoogleCalendarSyncService
+{
+    Task<string> CreateEventAsync(string calendarId, CreateAppointmentRequest request, CancellationToken ct);
 }

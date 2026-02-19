@@ -16,6 +16,8 @@ builder.Services.AddScoped<IStudyService, StudyService>();
 builder.Services.AddScoped<IAttachmentService, AttachmentService>();
 builder.Services.AddScoped<IAiService, AiService>();
 builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IMedicalCenterDirectoryService, MedicalCenterDirectoryService>();
+builder.Services.AddScoped<IGoogleCalendarSyncService, GoogleCalendarSyncService>();
 
 builder.Services.AddScoped<IAppointmentRepository, TableAppointmentRepository>();
 builder.Services.AddScoped<IStudyRepository, TableStudyRepository>();

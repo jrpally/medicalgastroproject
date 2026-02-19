@@ -86,3 +86,9 @@ dotnet build
 - Core architecture and API contracts are scaffolded.
 - Storage and queue integrations contain TODO markers for environment-specific wiring.
 - Offline sync worker and encrypted local store are skeleton implementations.
+
+## Secretary appointment workflow notes
+- The secretary page now sends `POST /appointments` with `medicalCenterId`, `providerId`, and `secretaryId`.
+- Backend validates provider/secretary membership within the selected medical center before booking.
+- On success, backend returns calendar sync results for both doctor and secretary calendars (Google Calendar sync service scaffold).
+

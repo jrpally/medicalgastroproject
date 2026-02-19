@@ -2,8 +2,10 @@ namespace Clinic.Api.DTOs;
 
 public sealed record CreateAppointmentRequest(
     Guid AppointmentId,
+    string MedicalCenterId,
     string PatientId,
     string ProviderId,
+    string SecretaryId,
     DateTimeOffset StartUtc,
     DateTimeOffset EndUtc,
     string? Notes,
