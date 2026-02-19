@@ -1,38 +1,38 @@
 # medicalgastroproject
 
-Blueprint y skeleton productivo para una plataforma clínica (medical gastro) con:
-- Agenda de citas y cola en tiempo real.
-- Estudios clínicos genéricos tipo EMR con adjuntos (imagen/documento/video).
-- Modo offline-first (local store + outbox sync).
-- Asistencia de IA para análisis de adjuntos y borradores de reporte.
-- Generación determinística de reportes Word con Open XML.
+Production-oriented blueprint and starter skeleton for a medical clinic platform with:
+- Appointment scheduling and real-time queue management.
+- Generic EMR-style studies with attachments (images/documents/videos).
+- Offline-first behavior (local store + outbox sync).
+- AI-assisted attachment analysis and report drafting.
+- Deterministic Word report generation with Open XML.
 
-## Documentación principal (links directos)
-- [Guía de inicio y ejecución local](./docs/how-to-start.md)
-- [Blueprint técnico completo (arquitectura, modelos, API, seguridad)](./docs/medical-clinic-blueprint.md)
+## Main documentation (direct links)
+- [Startup and local run guide](./docs/how-to-start.md)
+- [Complete technical blueprint (architecture, data models, API, security)](./docs/medical-clinic-blueprint.md)
 
-## Estructura del repositorio
-- [backend/src/Clinic.Api](./backend/src/Clinic.Api): API ASP.NET Core .NET 8 (REST + SignalR).
-- [frontend](./frontend): SPA React + TypeScript.
-- [workstation/Clinic.Workstation](./workstation/Clinic.Workstation): módulos offline (SQLite, cifrado, outbox worker) en formato skeleton.
-- [scripts/local-dev.sh](./scripts/local-dev.sh): levanta backend + frontend en macOS/Linux.
-- [scripts/local-dev.ps1](./scripts/local-dev.ps1): levanta backend + frontend en Windows PowerShell.
+## Repository structure
+- [backend/src/Clinic.Api](./backend/src/Clinic.Api): ASP.NET Core .NET 8 API (REST + SignalR).
+- [frontend](./frontend): React + TypeScript SPA.
+- [workstation/Clinic.Workstation](./workstation/Clinic.Workstation): offline modules (SQLite, encryption, outbox worker) in skeleton form.
+- [scripts/local-dev.sh](./scripts/local-dev.sh): starts backend + frontend on macOS/Linux.
+- [scripts/local-dev.ps1](./scripts/local-dev.ps1): starts backend + frontend on Windows PowerShell.
 
-## Configuración rápida
+## Quick configuration
 
-### 1) Prerrequisitos
+### 1) Prerequisites
 - .NET SDK 8+
-- Node.js 20+ y npm
-- (Opcional) Azurite o recursos Azure reales
+- Node.js 20+ and npm
+- (Optional) Azurite or real Azure resources
 
-### 2) Variables/configuración relevante
-> Estado actual: scaffold. Varias integraciones están en modo placeholder y se deben cablear por entorno.
+### 2) Relevant configuration notes
+> Current status: scaffold. Several integrations are placeholders and need environment-specific wiring.
 
-- **Backend Auth**: JWT Bearer habilitado, con políticas por rol (`Administrator`, `Secretary`, `Doctor`).
-- **Calendario**: existe un servicio `GoogleCalendarSyncService` de tipo scaffold (no OAuth productivo todavía).
-- **Storage/Queue**: hay abstracciones Azure (Tables/Blob/Queue) listas para implementar wiring real.
+- **Backend auth**: JWT Bearer enabled with role policies (`Administrator`, `Secretary`, `Doctor`).
+- **Calendar integration**: `GoogleCalendarSyncService` currently exists as a scaffold (not production OAuth integration yet).
+- **Storage/queue**: Azure abstractions (Tables/Blob/Queue) are present and ready for real implementation wiring.
 
-### 3) Arranque local (recomendado)
+### 3) Local startup (recommended)
 - **Windows PowerShell**:
   ```powershell
   ./scripts/local-dev.ps1
@@ -42,10 +42,10 @@ Blueprint y skeleton productivo para una plataforma clínica (medical gastro) co
   ./scripts/local-dev.sh
   ```
 
-Para instrucciones detalladas paso a paso, revisa:
+For full step-by-step instructions, see:
 - [docs/how-to-start.md](./docs/how-to-start.md)
 
-## Rutas frontend de demo (scaffold)
+## Frontend demo routes (scaffold)
 - `/admin/users`
 - `/secretary/calendar`
 - `/doctor/worklist`
@@ -53,5 +53,5 @@ Para instrucciones detalladas paso a paso, revisa:
 - `/doctor/studies/:studyId`
 - `/doctor/reports/:draftId`
 
-## Estado del proyecto
-Este repositorio está en modo **starter/skeleton**: sirve para validar arquitectura, contratos, flujo base y estructura de módulos, pero aún requiere integración productiva final (infra, OAuth Google real, persistencia completa, tests integrados end-to-end).
+## Project status
+This repository is currently in **starter/skeleton** mode: it is intended to validate architecture, contracts, and baseline workflow structure, but still requires full production integration (infrastructure, real Google OAuth integration, complete persistence, and end-to-end testing).
