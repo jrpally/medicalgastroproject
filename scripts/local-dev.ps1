@@ -55,16 +55,17 @@ try {
     Pop-Location
 
     Write-Host "[local-dev] Starting backend API on $BackendUrl ..."
-    $backendRunCommand = "set `"ASPNETCORE_URLS=$BackendUrl`" && dotnet run"
-    $backendProcess = Start-Process -FilePath "cmd.exe" `
-        -ArgumentList "/c", $backendRunCommand `
+    $env:ASPNETCORE_URLS = $BackendUrl
+    $backendProcess = Start-Process -FilePath "dotnet" `
+        -ArgumentList "run" `
         -WorkingDirectory $BackendDir `
         -PassThru `
         -NoNewWindow
 
     Write-Host "[local-dev] Starting frontend dev server on http://localhost:$FrontendPort ..."
-    $frontendProcess = Start-Process -FilePath "npm" `
-        -ArgumentList "run", "dev", "--", "--host", "0.0.0.0", "--port", "$FrontendPort" `
+    $frontendRunCommand = "npm run dev -- --host 0.0.0.0 --port $FrontendPort"
+    $frontendProcess = Start-Process -FilePath "cmd.exe" `
+        -ArgumentList "/c", $frontendRunCommand `
         -WorkingDirectory $FrontendDir `
         -PassThru `
         -NoNewWindow
